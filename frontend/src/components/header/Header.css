@@ -1,0 +1,10 @@
+.navLink {
+  color: inherit;
+  text-decoration: none;
+}
+.navLink button {
+  font-weight: normal;
+}
+.navLink.active button {
+  font-weight: bold;
+}
