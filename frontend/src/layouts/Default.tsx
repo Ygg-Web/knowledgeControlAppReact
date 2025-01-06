@@ -9,9 +9,15 @@ export interface LayoutProps {
 
 export default function Default({ children }: LayoutProps) {
   return (
-    <div style={{ display: "flex", flexDirection: "column", height: "100vh" }}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        minHeight: "100vh",
+      }}
+    >
       <TheHeader />
-      <main style={{ flex: "0 1 auto", height: "100%" }}>
+      <main style={{ flex: "1", height: "100%" }}>
         <Container
           maxWidth="xl"
           sx={{
