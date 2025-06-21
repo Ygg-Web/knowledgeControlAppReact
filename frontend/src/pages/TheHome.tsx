@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import PreviewTest from "../components/UI/PreviewTest";
+import PreviewTask from "../features/task/components/PreviewTask";
 import { Box, Button, TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import DykDatePicker from "../components/UI/datePickers/DykDatePicker";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -66,18 +67,18 @@ export default function Home() {
       <Box
         sx={{
           display: "flex",
-          flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
         }}
       >
+        <DykDatePicker sx={{ width: '300px', mr: 2}}/> 
         <TextField
           placeholder="Поиск"
           value={search}
           name="search"
           onChange={onSearch}
           size="small"
-          sx={{ width: "250px" }}
+          sx={{ width: "300px" }}
           type="text"
         />
       </Box>
@@ -117,7 +118,7 @@ export default function Home() {
           }}
         >
           {data.map((item) => (
-            <PreviewTest key={item.id} task={item} />
+            <PreviewTask key={item.id} task={item} />
           ))}
         </Box>
       )}

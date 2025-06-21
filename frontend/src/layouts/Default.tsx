@@ -4,16 +4,22 @@ import TheHeader from "../components/appHeader/TheHeader";
 import TheFooter from "../components/appFooter/TheFooter";
 import { createTheme, CssBaseline } from "@mui/material";
 import { ThemeProvider } from "@emotion/react";
+import { ruRU as coreruRU } from "@mui/material/locale";
+import { ruRU } from "@mui/x-date-pickers/locales";
 
 export interface LayoutProps {
   children: React.ReactNode;
 }
 
-const darkTheme = createTheme({
-  palette: {
-    mode: "dark",
+const darkTheme = createTheme(
+  {
+    palette: {
+      mode: "dark",
+    },
   },
-});
+  ruRU,
+  coreruRU
+);
 
 export default function Default({ children }: LayoutProps) {
   return (

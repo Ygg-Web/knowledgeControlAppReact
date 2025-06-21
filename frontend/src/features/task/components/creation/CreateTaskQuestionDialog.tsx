@@ -1,16 +1,23 @@
 import * as React from "react";
-import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import { Box, Checkbox, IconButton, TextField, Tooltip } from "@mui/material";
+import {
+  Box,
+  FormControl,
+  IconButton,
+  InputAdornment,
+  OutlinedInput,
+  Radio,
+  TextField,
+  Tooltip,
+} from "@mui/material";
 import AddBoxSharpIcon from "@mui/icons-material/AddBoxSharp";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { QuestionItem } from "../../features/task/types/task";
-import DykTypography from "./typography/DykTypography";
-import DykButton from "./buttons/DykButton";
+import { QuestionItem } from "../../types/task";
+import DykTypography from "../../../../components/UI/typography/DykTypography";
+import DykButton from "../../../../components/UI/buttons/DykButton";
 
 interface Props {
   header: string;
@@ -20,7 +27,7 @@ interface Props {
 class Answer {
   id = Date.now();
   text = "";
-  valid = true;
+  valid = false;
 }
 export default function TheDialog({ header, onSaveQuestion }: Props) {
   const [open, setOpen] = React.useState(false);
@@ -36,7 +43,7 @@ export default function TheDialog({ header, onSaveQuestion }: Props) {
   };
 
   const addAnswer = () => {
-    if (answers.length <= 5) {
+    if (answers.length < 5) {
       setAswers([...answers, new Answer()]);
     } else {
       console.log("max 5 вариантов ответа");
@@ -88,27 +95,19 @@ export default function TheDialog({ header, onSaveQuestion }: Props) {
           size="large"
           onClick={handleClickOpen}
           disableRipple
-          sx={{p: 0, mx: 0, mb: 1}}
+          sx={{ p: 0, mx: 0, mb: 1 }}
         >
           <AddBoxSharpIcon fontSize="inherit" />
         </IconButton>
       </Tooltip>
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        fullWidth
-        maxWidth="sm"
-        PaperProps={{
-          sx: {
-            maxHeight: 900,
-          },
-        }}
-      >
-        <DialogTitle component="div" variant="body1">{header}</DialogTitle>
+      <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">
+        <DialogTitle component="div" variant="body1">
+          {header}
+        </DialogTitle>
         <DialogContent
           dividers
           sx={{
-            maxHeight: 400,
+            height: 400,
           }}
         >
           <TextField
@@ -120,7 +119,11 @@ export default function TheDialog({ header, onSaveQuestion }: Props) {
             size="small"
             sx={{ my: 1 }}
           />
-          <DykTypography text="Создайте варианты ответов на вопрос" variant="body2" align="center"/>
+          <DykTypography
+            text="Создайте варианты ответов на вопрос"
+            variant="body2"
+            align="center"
+          />
           <Box sx={{ display: "flex", justifyContent: "center" }}>
             <Tooltip title="Добавить ответ">
               <IconButton
@@ -128,7 +131,7 @@ export default function TheDialog({ header, onSaveQuestion }: Props) {
                 size="large"
                 onClick={addAnswer}
                 disableRipple
-                sx={{ p: 0, my: 1}}
+                sx={{ p: 0, my: 1 }}
               >
                 <AddBoxSharpIcon fontSize="inherit" />
               </IconButton>
@@ -136,31 +139,45 @@ export default function TheDialog({ header, onSaveQuestion }: Props) {
           </Box>
           {answers.map((answer) => (
             <Box sx={{ display: "flex", justifyContent: "center" }}>
-              <Checkbox
-                checked={answer.valid}
-                onChange={(e) => handleCheckboxChange(answer.id, e)}
-                disableRipple
-              />
-              <TextField
-                key={`${answer.id}`}
-                value={answer.text}
-                onChange={(e) => handleInputChange(answer.id, e.target.value)}
-                fullWidth
+              <FormControl
+                variant="outlined"
                 size="small"
-                sx={{ my: 1 }}
-              />
-              <IconButton
-                aria-label="delete"
-                size="large"
-                onClick={() => deleteAnswer(answer.id)}
-                disableRipple
+                fullWidth
               >
-                <DeleteIcon fontSize="inherit" />
-              </IconButton>
+                <OutlinedInput
+                  key={`${answer.id}`}
+                  placeholder="Введите ответ"
+                  fullWidth
+                  sx={{ my: 1 }}
+                  value={answer.text}
+                  onChange={(e) => handleInputChange(answer.id, e.target.value)}
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="delete"
+                        size="large"
+                        onClick={() => deleteAnswer(answer.id)}
+                        disableRipple
+                      >
+                        <DeleteIcon fontSize="inherit" />
+                      </IconButton>
+                    </InputAdornment>
+                  }
+                  startAdornment={
+                    <InputAdornment position="start">
+                      <Radio
+                        checked={answer.valid}
+                        onChange={(e) => handleCheckboxChange(answer.id, e)}
+                        disableRipple
+                      />
+                    </InputAdornment>
+                  }
+                />
+              </FormControl>
             </Box>
           ))}
         </DialogContent>
-        <DialogActions>
+        <DialogActions sx={{ m: 1 }}>
           {/* TODO: autoFocus */}
           <DykButton title="Сохранить" onClick={onSave} />
           <DykButton title="Отмена" onClick={handleClose} />

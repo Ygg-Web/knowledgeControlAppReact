@@ -1,10 +1,10 @@
 import { Box, TextField } from "@mui/material";
 import React from "react";
-import TheDialog from "../../../../components/UI/TheDialog";
+import CreateTaskQuestionDialog from "./CreateTaskQuestionDialog";
 import { QuestionItem } from "../../types/task";
 
 interface Props {
-  questions: QuestionItem[],
+  questions: QuestionItem[];
   onSaveQuestion: (question: QuestionItem) => void;
 }
 export default function CreateTaskQuestions({
@@ -20,7 +20,10 @@ export default function CreateTaskQuestions({
         m: 1,
       }}
     >
-      <TheDialog header="Создание вопроса" onSaveQuestion={onSaveQuestion} />
+      <CreateTaskQuestionDialog
+        header="Создание вопроса"
+        onSaveQuestion={onSaveQuestion}
+      />
       <Box
         sx={{
           display: "flex",

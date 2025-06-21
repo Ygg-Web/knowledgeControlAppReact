@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 import React from "react";
-import PreviewCard from "../../components/UI/PreviewTest";
+import PreviewTask from "../task/components/PreviewTask";
 import { TaskItem } from "../task/types/task";
 
 export default function TaskList({ data }: { data: TaskItem[] }) {
@@ -14,7 +14,7 @@ export default function TaskList({ data }: { data: TaskItem[] }) {
       }}
     >
       {data.map((item) => (
-        <PreviewCard key={item.id} task={item} />
+        <PreviewTask key={item.id} task={item} />
       ))}
     </Box>
   );

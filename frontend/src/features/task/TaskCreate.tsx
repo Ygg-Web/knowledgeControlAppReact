@@ -5,7 +5,7 @@ import CreateTaskDescription from "./components/creation/CreateTaskDescription";
 import DykTypography from "../../components/UI/typography/DykTypography";
 import CreateTaskQuestions from "./components/creation/CreateTaskQuestions";
 import { QuestionItem } from "./types/task";
-import PreviewTest from "../../components/UI/PreviewTest";
+import PreviewTask from "./components/PreviewTask";
 import CreateTaskReady from "./components/creation/CreateTaskReady";
 import CreateTaskStepper from "./components/creation/CreateTaskStepper";
 import CreateTaskActions from "./components/creation/CreateTaskActions";
@@ -40,8 +40,6 @@ export default function TaskCreate() {
   };
 
   const onSave = () => {};
-
-  const onPreview = () => {};
 
   const [activeStep, setActiveStep] = React.useState(0);
 
@@ -114,7 +112,7 @@ export default function TaskCreate() {
                     sx={{ mb: 2 }}
                     variant="body2"
                   />
-                  <PreviewTest key={item.id} task={item} />
+                  <PreviewTask key={item.id} task={item} />
                 </Box>
               )}
             </Box>

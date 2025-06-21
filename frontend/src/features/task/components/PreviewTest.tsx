@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 import CardActionArea from "@mui/material/CardActionArea";
 import { Link } from "react-router-dom";
 import { Avatar, Box } from "@mui/material";
-import DykTypography from "./typography/DykTypography";
+import DykTypography from "../../../components/UI/typography/DykTypography";
 
 interface Task {
   id: number;
@@ -21,7 +21,7 @@ interface Props {
   task: Task;
 }
 
-export default function PreviewCard({ task }: Props) {
+export default function PreviewTask({ task }: Props) {
   return (
     <Card sx={{ maxWidth: 345, m: 2 }}>
       <Link
