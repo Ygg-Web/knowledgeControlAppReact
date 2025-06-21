@@ -1,37 +1,56 @@
 import React from "react";
 import Container from "@mui/material/Container";
-import TheHeader from "../components/header/TheHeader";
-import TheFooter from "../components/footer/TheFooter";
+import TheHeader from "../components/appHeader/TheHeader";
+import TheFooter from "../components/appFooter/TheFooter";
+import { createTheme, CssBaseline } from "@mui/material";
+import { ThemeProvider } from "@emotion/react";
 
 export interface LayoutProps {
   children: React.ReactNode;
 }
 
+const darkTheme = createTheme({
+  palette: {
+    mode: "dark",
+  },
+});
+
 export default function Default({ children }: LayoutProps) {
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        minHeight: "100vh",
-      }}
-    >
-      <TheHeader />
-      <main style={{ flex: "1", height: "100%" }}>
-        <Container
-          maxWidth="xl"
-          sx={{
-            backgroundColor: "black",
+    <ThemeProvider theme={darkTheme}>
+      <CssBaseline />
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          minHeight: "100vh",
+        }}
+      >
+        <TheHeader />
+        <main
+          style={{
+            flex: "auto",
             height: "100%",
-            color: "white",
             borderBottom: "1px solid #DCDCDC",
             borderTop: "1px solid #DCDCDC",
+            display: "flex",
+            flexDirection: "column",
           }}
         >
-          {children}
-        </Container>
-      </main>
-      <TheFooter />
-    </div>
+          <Container
+            maxWidth="xl"
+            sx={{
+              flex: "auto",
+              display: "flex",
+              flexDirection: "column",
+              height: "100%",
+            }}
+          >
+            {children}
+          </Container>
+        </main>
+        <TheFooter />
+      </div>
+    </ThemeProvider>
   );
 }
